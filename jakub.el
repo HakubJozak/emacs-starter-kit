@@ -1,7 +1,8 @@
-;; (require 'yasnippet)
-;; (yas/initialize)
-;; (yas/load-directory "~/.emacs.d/jakub/snippets")
-;; (setq yas/prompt-functions '(yas/ido-prompt yas/dropdown-prompt yas/no-prompt yas/x-prompt))
+(add-to-list 'load-path (concat dotfiles-dir "jakub/yasnippet-0.6.1c"))
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/jakub/snippets")
+(setq yas/prompt-functions '(yas/ido-prompt yas/dropdown-prompt yas/no-prompt yas/x-prompt))
 
 
 ; Copy & Paste
