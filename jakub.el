@@ -29,6 +29,8 @@
 
 ; Fixing defaults
 (setq require-final-newline nil)
+(setq truncate-lines t)
+
 (define-key global-map "\C-h" 'backward-delete-char)
 (define-key global-map "\C-t" 'help-command)
 
