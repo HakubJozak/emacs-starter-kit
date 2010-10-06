@@ -10,10 +10,6 @@
 (setq my-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 (set-frame-font my-font)
 
-(global-set-key [f10] (lambda () (interactive) (open-utility-file  "~/.emacs.d/snippets/text-mode/ruby-mode/")))
-(global-set-key [f11] (lambda () (interactive) (open-utility-file  "~/.emacs.d/jakub.el")))
-(global-set-key [f12] (lambda () (interactive) (open-utility-file  "~/.bashrc")))
-
 
 ; YASnippets
 (add-to-list 'load-path (concat dotfiles-dir "jakub/yasnippet-0.6.1c"))
@@ -22,6 +18,28 @@
 (yas/load-directory "~/.emacs.d/jakub/snippets")
 (setq yas/prompt-functions '(yas/ido-prompt yas/dropdown-prompt yas/no-prompt yas/x-prompt))
 
+
+; Cucumber.el
+(add-to-list 'load-path (concat dotfiles-dir "jakub/cucumber"))
+(require 'feature-mode)
+
+; Toggle
+(require 'toggle)
+
+(global-set-key
+ (kbd "C-c C-t")
+ 'toggle-buffer
+)
+
+
+(global-set-key
+ (kbd "C-c M-t")
+ '(lambda ()
+    (interactive)
+    (setq toggle-mappings
+          (toggle-style
+           (if (string-match "^app" (caar toggle-mappings)) "ruby"
+             "rails")))))
 
 ; Copy & Paste
 (setq mouse-drag-copy-region nil)  ; stops selection with a mouse being immediately injected to the kill ring
@@ -52,5 +70,7 @@
                         (toggle-truncate-lines)
 )
 
-
+(global-set-key [f10] (lambda () (interactive) (open-utility-file  "~/.emacs.d/jakub/snippets/text-mode/ruby-mode/")))
+(global-set-key [f11] (lambda () (interactive) (open-utility-file  "~/.emacs.d/jakub.el")))
+(global-set-key [f12] (lambda () (interactive) (open-utility-file  "~/.bashrc")))
 
