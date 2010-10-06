@@ -1,14 +1,25 @@
 ; Miscelaneous
 (setq require-final-newline nil)
 (setq truncate-lines t)
-
 (remove-hook 'text-mode-hook 'turn-on-auto-fill)
-
-(define-key global-map "\C-h" 'backward-delete-char)
-(define-key global-map "\C-t" 'help-command)
 
 (setq my-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 (set-frame-font my-font)
+
+; Keys
+(global-set-key [f10] (lambda () (interactive) (open-utility-file  "~/.emacs.d/jakub/snippets/text-mode/ruby-mode/")))
+(global-set-key [f11] (lambda () (interactive) (open-utility-file  "~/.emacs.d/jakub.el")))
+(global-set-key [f12] (lambda () (interactive) (open-utility-file  "~/.bashrc")))
+
+(define-key global-map "\C-t" 'help-char)
+(define-key global-map "\C-h" 'backward-delete-char)
+
+
+(defun coding-keymap ()
+  (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region))
+
+
+(add-hook 'coding-hook 'coding-keymap)
 
 
 ; YASnippets
@@ -64,13 +75,14 @@
   (mydired-sort))
 
 
+; Keys
 (defun open-utility-file (name)
                         (find-file-other-frame name)
                         (set-frame-font my-font)
                         (toggle-truncate-lines)
 )
 
-(global-set-key [f10] (lambda () (interactive) (open-utility-file  "~/.emacs.d/jakub/snippets/text-mode/ruby-mode/")))
-(global-set-key [f11] (lambda () (interactive) (open-utility-file  "~/.emacs.d/jakub.el")))
-(global-set-key [f12] (lambda () (interactive) (open-utility-file  "~/.bashrc")))
 
+; Themes hack
+(color-theme-twilight)
+(zenburn)
