@@ -11,7 +11,7 @@
 (global-set-key [f11] (lambda () (interactive) (open-utility-file  "~/.emacs.d/jakub.el")))
 (global-set-key [f12] (lambda () (interactive) (open-utility-file  "~/.bashrc")))
 
-(define-key global-map "\C-t" 'help-char)
+(define-key global-map "\C-t" 'help-command)
 (define-key global-map "\C-h" 'backward-delete-char)
 
 
