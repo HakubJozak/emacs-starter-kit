@@ -6,12 +6,25 @@
 (setq my-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 (set-frame-font my-font)
 
+; IDo
+(setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
+(defun ido-disable-line-trucation () (set (make-local-variable 'truncate-lines) nil))
+(add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-trucation)
+
+
+; Winner - UNDO and REDO of window configuration
+(winner-mode)
+(global-set-key (kbd "C-c [") 'winner-undo)
+(global-set-key (kbd "C-c ]") 'winner-redo)
+
+
 ; Keys
+(global-set-key [f2] 'shell)
 (global-set-key [f10] (lambda () (interactive) (open-utility-file  "~/.emacs.d/jakub/snippets/text-mode/ruby-mode/")))
 (global-set-key [f11] (lambda () (interactive) (open-utility-file  "~/.emacs.d/jakub.el")))
 (global-set-key [f12] (lambda () (interactive) (open-utility-file  "~/.bashrc")))
 
-(define-key global-map "\C-t" 'help-command)
+(define-key global-map [f1] 'help-command)
 (define-key global-map "\C-h" 'backward-delete-char)
 
 
@@ -86,3 +99,4 @@
 ; Themes hack
 (color-theme-twilight)
 (zenburn)
+
