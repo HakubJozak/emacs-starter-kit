@@ -49,21 +49,10 @@
 
 ; Toggle
 (require 'toggle)
-
-(global-set-key
- (kbd "C-c C-t")
- 'toggle-buffer
-)
+(setq toggle-mappings (toggle-style "rails"))
+(global-set-key (kbd "C-c C-t") 'toggle-buffer)
 
 
-(global-set-key
- (kbd "C-c M-t")
- '(lambda ()
-    (interactive)
-    (setq toggle-mappings
-          (toggle-style
-           (if (string-match "^app" (caar toggle-mappings)) "ruby"
-             "rails")))))
 
 ; Copy & Paste
 (setq mouse-drag-copy-region nil)  ; stops selection with a mouse being immediately injected to the kill ring
