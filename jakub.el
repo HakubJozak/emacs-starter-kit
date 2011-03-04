@@ -2,6 +2,7 @@
 (setq require-final-newline nil)
 (setq truncate-lines t)
 (remove-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (setq my-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 (set-frame-font my-font)
@@ -87,5 +88,8 @@
 
 ; Themes hack
 (color-theme-twilight)
-(zenburn)
+(color-theme-zenburn)
+
+
+
 
