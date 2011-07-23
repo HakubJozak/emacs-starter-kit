@@ -4,7 +4,8 @@
 (remove-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(setq my-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-17-*-*-*-m-0-iso10646-1")
+(setq my-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-18-*-*-*-m-0-iso10646-1")
+
 (set-frame-font my-font)
 
 ; IDo
@@ -88,7 +89,6 @@
 
 ; Themes hack
 (color-theme-twilight)
-(color-theme-zenburn)
 
 
 
