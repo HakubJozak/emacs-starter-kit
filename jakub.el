@@ -4,7 +4,10 @@
 (remove-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(setq my-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-18-*-*-*-m-0-iso10646-1")
+(if (eq (display-pixel-width) 1680)
+  (setq my-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+  (setq my-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-18-*-*-*-m-0-iso10646-1")
+  )
 
 (set-frame-font my-font)
 
@@ -79,13 +82,25 @@
   (mydired-sort))
 
 
-; Keys
 (defun open-utility-file (name)
-                        (find-file-other-frame name)
-                        (set-frame-font my-font)
-                        (toggle-truncate-lines)
+  (find-file-other-frame name)
+  (set-frame-font my-font)
+  (toggle-truncate-lines)
 )
 
+(defun irc-go ()
+  (interactive)
+  (require 'erc-join)
+  (erc-autojoin-mode 1)
+;(erc :server "irc.freenodeirc.net" :port 6667 :nick "HakubJozak")
+  (erc :server "irc.3scale.net" :port 61669 :nick "jakub")
+  (setq erc-autojoin-channels-alist
+        '(("3scale.net" "#dev")
+          ("3scale.net" "#jenkins")
+          ("3scale.net" "#github")
+          ("3scale.net" "#deploy")
+          ))
+  )
 
 ; Themes hack
 (color-theme-twilight)
