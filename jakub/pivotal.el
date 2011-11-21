@@ -22,6 +22,6 @@
 
       (message "%s" stories)
       (message "%s" count)
-      (insert (completing-read "Choose one" stories))
+      (insert (completing-read "Story: " stories))
      )
   )
