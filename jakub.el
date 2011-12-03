@@ -5,10 +5,10 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ; (display-pixel-width) 1920
-(if (string-match "jakub-laptop" (eshell-command-result "uname -n"))
-  (setq my-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-18-*-*-*-m-0-iso10646-1")
-  (setq my-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")
-)
+;(if (string-match "jakub-laptop" (eshell-command-result "uname -n"))
+;  (setq my-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-18-*-*-*-m-0-iso10646-1")
+;  (setq my-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")
+;)
 
 (set-frame-font my-font)
 
@@ -19,7 +19,7 @@
 
 
 
-(eshell-command-result "uname -n")
+; (eshell-command-result "uname -n")
 
 ; Winner - UNDO and REDO of window configuration
 (winner-mode)
