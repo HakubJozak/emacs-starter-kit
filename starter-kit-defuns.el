@@ -34,15 +34,15 @@ Symbols matching the text at point are put first in the completion list."
                              (cond
                               ((and (listp symbol) (imenu--subalist-p symbol))
                                (addsymbols symbol))
-                              
+
                               ((listp symbol)
                                (setq name (car symbol))
                                (setq position (cdr symbol)))
-                              
+
                               ((stringp symbol)
                                (setq name symbol)
                                (setq position (get-text-property 1 'org-imenu-marker symbol))))
-                             
+
                              (unless (or (null position) (null name))
                                (add-to-list 'symbol-names name)
                                (add-to-list 'name-and-pos (cons name position))))))))
@@ -87,7 +87,8 @@ Symbols matching the text at point are put first in the completion list."
   (whitespace-mode t))
 
 (defun turn-on-paredit ()
-  (paredit-mode t))
+;  (   paredit-mode t)
+  )
 
 (defun turn-off-tool-bar ()
   (tool-bar-mode -1))
@@ -107,7 +108,7 @@ Symbols matching the text at point are put first in the completion list."
 (add-hook 'coding-hook 'pretty-lambdas)
 (add-hook 'coding-hook 'add-watchwords)
 (add-hook 'coding-hook 'turn-on-idle-highlight)
-  
+
 (defun run-coding-hook ()
   "Enable things that are convenient across all coding buffers."
   (run-hooks 'coding-hook))
@@ -213,9 +214,10 @@ Symbols matching the text at point are put first in the completion list."
 
 (defun esk-paredit-nonlisp ()
   "Turn on paredit mode for non-lisps."
-  (set (make-local-variable 'paredit-space-delimiter-chars)
-       (list ?\"))
-  (paredit-mode 1))
+  ;; (set (make-local-variable 'paredit-space-delimiter-chars)
+  ;;      (list ?\"))
+ ;  (paredit-mode 1)
+  )
 
 (defun esk-space-for-delimiter? (endp delimiter)
   (not (member major-mode '(ruby-mode espresso-mode js2-mode))))

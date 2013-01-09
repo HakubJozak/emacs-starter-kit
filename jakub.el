@@ -1,16 +1,15 @@
-; Miscelaneous
+; Miscelaneous setq'
 (setq require-final-newline nil)
 (setq truncate-lines t)
+(setq ido-default-file-method "selected-window")
+(setq ido-default-buffer-method "selected-window")
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome")
+
+
 (remove-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-; (display-pixel-width) 1920
-;(if (string-match "jakub-laptop" (eshell-command-result "uname -n"))
-;  (setq my-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-18-*-*-*-m-0-iso10646-1")
-;  (setq my-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")
-;)
-
-(set-frame-font my-font)
 
 ; IDo
 (setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
@@ -18,28 +17,29 @@
 (add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-trucation)
 
 
-
-; (eshell-command-result "uname -n")
-
-; Winner - UNDO and REDO of window configuration
 (winner-mode)
-(global-set-key (kbd "C-c [") 'winner-undo)
-(global-set-key (kbd "C-c ]") 'winner-redo)
-
 
 ; Keys
-(global-set-key [f2] 'shell)
+(global-set-key (kbd "C-c [") 'winner-undo)
+(global-set-key (kbd "C-c ]") 'winner-redo)
+(global-set-key (kbd "C-c g") 'vc-git-grep)
+
 (global-set-key [f10] (lambda () (interactive) (open-utility-file  "~/.emacs.d/jakub/snippets/text-mode/ruby-mode/")))
 (global-set-key [f11] (lambda () (interactive) (open-utility-file  "~/.emacs.d/jakub.el")))
 (global-set-key [f12] (lambda () (interactive) (open-utility-file  "~/.bashrc")))
 (global-set-key (kbd "C-c C-x C-f") 'sudo-edit)
 
-(define-key global-map [f1] 'help-command)
+(define-key global-map (kbd "C-c h") 'help-command)
 (define-key global-map "\C-h" 'backward-delete-char)
 
 
+(require 'expand-region)
+
 (defun coding-keymap ()
-  (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region))
+  (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
+  (local-set-key (kbd "C-c f") 'er/expand-region)
+  (local-set-key (kbd "C-c b") 'er/contract-region)
+  )
 
 
 (add-hook 'coding-hook 'coding-keymap)
@@ -52,15 +52,15 @@
 (yas/load-directory "~/.emacs.d/jakub/snippets")
 (setq yas/prompt-functions '(yas/ido-prompt yas/dropdown-prompt yas/no-prompt yas/x-prompt))
 
-
 ; Cucumber.el
-(add-to-list 'load-path (concat dotfiles-dir "jakub/cucumber"))
-(require 'feature-mode)
-
-; Toggle
-(require 'toggle)
-(setq toggle-mappings (toggle-style "rails"))
-(global-set-key (kbd "C-c C-t") 'toggle-buffer)
+(if (file-exists-p "~/.emacs.d/jakub/cucumber")
+    (let ()
+      (add-to-list 'load-path "~/.emacs.d/jakub/cucumber")
+      (yas/load-directory "~/.emacs.d/jakub/cucumber/snippets")
+      (require 'feature-mode)
+      (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode)
+      (setq feature-cucumber-command "bundle exec cucumber {options} {feature}")
+)))
 
 
 
@@ -71,6 +71,7 @@
 (setq select-active-regions t) ;  active region sets primary X11 selection
 (global-set-key [mouse-2] 'mouse-yank-primary)  ; make mouse middle-click only paste from primary X11 selection, not clipboard and kill ring.
 (setq yank-pop-change-selection t)  ; makes rotating the kill ring change the X11 clipboard.
+
 
 ; Fixing Dired
 (defun mydired-sort ()
@@ -86,20 +87,20 @@
   "Sort dired listings with directories first before adding marks."
   (mydired-sort))
 
-
 (defun open-utility-file (name)
   (find-file-other-frame name)
   (set-frame-font my-font)
   (toggle-truncate-lines)
   )
 
-; (require 'rvm)
-; (rvm-autodetect-ruby)
+(require 'rvm)
+(rvm-autodetect-ruby)
 
-
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "google-chrome")
 
 
 ;; (unless (zenburn-format-spec-works-p)
 ;;   (zenburn-define-format-spec))
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+
+
+(server-start)
